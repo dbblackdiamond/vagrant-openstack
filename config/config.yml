@@ -1,0 +1,96 @@
+version: "liberty"
+nodes: "controller01,network01,compute01,compute02,block01,block02,compute03"
+
+password:
+    admin: "Password01"
+    demo: "Password01"
+    root: "Password01"
+    rabbit: "Password01"
+    keystone: "Password01"
+    glance: "Password01"
+    nova: "Password01"
+    neutron: "Password01"
+    cinder: "Password01"
+    ceilometer: "Password01"
+
+controller01:
+    name: "controller01"
+    extip: "192.168.1.135"
+    mgmtip: "192.168.50.135"
+    tunip: "192.168.60.135"
+    role: "controller"
+    vmware: "true"
+    memory: "1024"
+    cpu: "1"
+
+compute01:
+    name: "compute01"
+    extip: "192.168.1.136"
+    mgmtip: "192.168.50.136"
+    tunip: "192.168.60.136"
+    role: "compute"
+    memory: "4096"
+    cpu: "2"
+
+compute02:
+    name: "compute02"
+    extip: "192.168.1.140"
+    mgmtip: "192.168.50.140"
+    tunip: "192.168.60.140"
+    role: "compute"
+    memory: "4096"
+    cpu: "2"
+
+compute03:
+    name: "compute03"
+    extip: "192.168.1.143"
+    mgmtip: "192.168.50.143"
+    tunip: "192.168.60.143"
+    role: "vmware"
+    memory: "1024"
+    vcenter_pass: "Password01!"
+    vcenter_user: "openstack@leobigfoot.com"
+    vcenter_ip: "192.168.1.13"
+    vcenter_cluster: "Production"
+    datastore_regex: "VMFS*"
+    cpu: "1"
+
+network01:
+    name: "network01"
+    extip: "0.0.0.0"
+    mgmtip: "192.168.50.137"
+    tunip: "192.168.60.137"
+    role: "network"
+    memory: "1024"
+    cpu: "1"
+    sharedsecret: "Password01"
+    extif: "eth1"
+    extsubnet: "192.168.1.0"
+    extgw: "192.168.1.1"
+    poolipstart: "192.168.1.160"
+    poolipend: "192.168.1.199"
+    demosubnet: "10.10.10.0"
+    demogw: "10.10.10.1"
+
+block01:
+    name: "block01"
+    extip: "192.168.1.138"
+    mgmtip: "192.168.50.138"
+    tunip: "192.168.60.138"
+    role: "block"
+    disk: "/virtual_machines/openstack/sdb_block01.vdi"
+    size: 10
+    memory: 1024
+    cpu: 1
+
+block02:
+    name: "block02"
+    extip: "192.168.1.139"
+    mgmtip: "192.168.50.139"
+    tunip: "192.168.60.139"
+    role: "block"
+    disk: "/virtual_machines/openstack/sdb_block02.vdi"
+    size: 10
+    memory: 1024
+    cpu: 1
+

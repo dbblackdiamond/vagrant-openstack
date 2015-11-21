@@ -1,0 +1,11 @@
+[DEFAULT]
+compute_driver = vmwareapi.VMwareVCDriver
+
+[vmware]
+host_ip = VCENTER_IP
+host_username = VCENTER_USER
+host_password = VCENTER_PASS
+cluster_name = VCENTER_CLUSTER
+datastore_regex = DATASTORE_REGEX
+reserved_host_memory_mb = 0
+insecure = true

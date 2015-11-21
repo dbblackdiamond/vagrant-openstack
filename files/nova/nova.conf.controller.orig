@@ -1,0 +1,56 @@
+[DEFAULT]
+debug=True
+dhcpbridge_flagfile=/etc/nova/nova.conf
+dhcpbridge=/usr/bin/nova-dhcpbridge
+logdir=/var/log/nova
+state_path=/var/lib/nova
+lock_path=/var/lock/nova
+force_dhcp_release=True
+libvirt_use_virtio_for_bridges=True
+verbose=True
+ec2_private_dns_show_ip=True
+api_paste_config=/etc/nova/api-paste.ini
+enabled_apis=ec2,osapi_compute,metadata
+rpc_backend = rabbit
+auth_strategy = keystone
+my_ip = CTRLIP
+vncserver_listen = CTRLPIP
+vncserver_proxyclient_address = CTRLPIP
+network_api_class = nova.network.neutronv2.api.API
+security_group_api = neutron
+linuxnet_interface_driver = nova.network.linux_net.LinuxOVSInterfaceDriver
+firewall_driver = nova.virt.firewall.NoopFirewallDriver
+
+[database]
+connection = mysql://nova:PWD@CTRLIP/nova
+
+[oslo_messaging_rabbit]
+rabbit_host = CTRLIP
+rabbit_userid = openstack
+rabbit_password = RPWD
+
+[keystone_authtoken]
+auth_uri = http://CTRLIP:5000
+auth_url = http://CTRLIP:35357
+auth_plugin = password
+project_domain_id = default
+user_domain_id = default 
+project_name = service
+username = nova
+password = PWD
+
+[glance]
+host = CTRLIP
+
+[oslo_concurrency]
+locl_path = /var/lib/nova/tmp
+
+[neutron]
+url = http://CTRLIP:9696
+auth_strategy = keystone
+admin_auth_url = http://CTRLIP:35357/v2.0
+admin_tenant_name = service
+admin_username = neutron
+admin_password = NPWD
+service_metadata_proxy = True
+metadata_proxy_shared_secret = NPWD
