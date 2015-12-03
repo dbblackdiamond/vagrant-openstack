@@ -1,5 +1,5 @@
-version: "liberty"
-nodes: "controller01,network01,compute01,compute02,block01,block02,compute03"
+version: "kilo"
+nodes: "controller01,network01,compute01,compute02,block01"
 
 password:
     admin: "Password01"
@@ -93,4 +93,3 @@ block02:
     size: 10
     memory: 1024
     cpu: 1
-

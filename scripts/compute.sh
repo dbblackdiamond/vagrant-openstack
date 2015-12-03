@@ -18,6 +18,9 @@ done
 
 source ${CONFIGFILE}
 
+echo "COMPUTEPUBIP = ${COMPUTEPUBIP}"
+echo "COMPUTEPRIVIP = ${COMPUTEPRIVIP}"
+
 echo "Setting up swap space..."
 fallocate -l 8G /swapfile
 chmod 600 /swapfile
@@ -73,3 +76,13 @@ apt-get -qq -y --force-yes install ceilometer-agent-compute
 sed -e "s/CTRLIP/${CONTROLLERPRIVATEIP}/" -e "s/RABBIT_PASS/${RABBITMQPWD}/" -e "s/CEILOMETER_PASS/${CEILOMETER_PASS}/" \
 	/vagrant/files/ceilometer/ceilometer.conf.compute.orig > /etc/ceilometer/ceilometer.conf
 service ceilometer-agent-compute restart
+
+echo "Creating open security group..."
+source /home/vagrant/demo-openrc.sh
+OPEN_SECGROUP=`nova secgroup-list |grep open`
+if [ -z "${OPEN_SECGROUP}" ]; then
+    nova secgroup-create open "Fully open security group"
+    nova secgroup-add-rule open icmp -1 -1 0.0.0.0/0
+    nova secgroup-add-rule open tcp 1 65535 0.0.0.0/0
+    nova secgroup-add-rule open udp 1 65535 0.0.0.0/0
+fi

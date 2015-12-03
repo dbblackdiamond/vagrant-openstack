@@ -85,7 +85,7 @@ Vagrant.configure(2) do |config|
                 fconfig.puts "ROOTPWD=#{env['password']['root']}\n"
                 fconfig.puts "NOVAPWD=#{env['password']['nova']}\n"
                 fconfig.puts "NEUTRONPWD=#{env['password']['neutron']}\n"
-                fconfig.puts "COMPUTEIP=#{extip}\n"
+                fconfig.puts "COMPUTEPUBIP=#{extip}\n"
                 fconfig.puts "COMPUTELOCALIP=#{tunip}\n"
                 fconfig.puts "COMPUTEPRIVIP=#{mgmtip}\n"
                 fconfig.close
@@ -152,6 +152,7 @@ Vagrant.configure(2) do |config|
                 fconfig.puts "POOLEND=#{env[node]['poolipend']}\n"
                 fconfig.puts "DEMOSUB=#{env[node]['demosubnet']}\n"
                 fconfig.puts "DEMOGW=#{env[node]['demogw']}\n"
+                fconfig.puts "LOCALIP=#{env[node]['tunip']}\n"
                 fconfig.close
 				node_config.vm.network "public_network", bridge: "p4p1", auto_config: false
 				node_config.vm.network "private_network", ip: "#{mgmtip}", intnet: "openstack_internal"
